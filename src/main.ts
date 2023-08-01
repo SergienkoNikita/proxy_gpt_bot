@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import * as process from "process";
 import express from 'express'
-import {Telegraf} from "telegraf";
+import { Telegraf } from "telegraf";
 
 dotenv.config();
 
