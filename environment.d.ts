@@ -1,7 +1,7 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      BOT_TOKEN: '6487907792:AAE4CrzKvlsSpRYsqZdH6dvmY0MPeuhReak'
+      BOT_TOKEN: string
       PORT: '8000'
     }
   }
