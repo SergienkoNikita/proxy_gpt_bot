@@ -38,26 +38,28 @@ class Logger {
 		}
 	}
 
+	private formattedMessageForFile(message: LoggerMessage): string {
+		if (typeof message === 'string' || typeof message === 'number') {
+			return `${message}`
+		} else if (message instanceof Error) {
+			return `${message.toString()}`
+		} else {
+			return `${JSON.stringify(message)}`
+		}
+	}
+
+	private getMessageForFile(message: LoggerMessage, logType: LoggerLogType): string {
+		return `\n\n${logType.toLocaleUpperCase()}: (${new Date().toLocaleString()}): ${this.formattedMessageForFile(message)} (${typeof message})\n${'_ '.repeat(100)}`
+	}
+
 	private logToFile(
 		message: LoggerMessage,
 		logType: LoggerLogType,
 	): void {
-		if (typeof message === 'string' || typeof message === 'number') {
-			fs.appendFileSync(
-				this.logFilePath,
-				`\n\n${logType.toLocaleUpperCase()}: ${message} (${typeof message})\n${'_ '.repeat(100)}`
-			)
-		} else if (message instanceof Error) {
-			fs.appendFileSync(
-				this.logFilePath,
-				`\n\n${logType.toLocaleUpperCase()}: ${message.toString()} (${typeof message})\n${'_ '.repeat(100)}`
-			)
-		} else {
-			fs.appendFileSync(
-				this.logFilePath,
-				`\n\n${logType.toLocaleUpperCase()}: ${JSON.stringify(message)} (${typeof message})\n${'_ '.repeat(100)}`
-			)
-		}
+		fs.appendFileSync(
+			this.logFilePath,
+			this.getMessageForFile(message, logType)
+		)
 	}
 
 	private addLogMessage(message: LoggerMessage, target: LoggerTarget, type: LoggerLogType) {
