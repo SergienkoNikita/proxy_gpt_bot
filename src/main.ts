@@ -32,7 +32,7 @@ const prepareAndStart = async () => {
 
     if (isIpRussian) {
       logger.error('Can`t start server. Your`s IP-address is Russian. Please use VPN.', 'log')
-      logger.error(`Can\`t start server. IP-address is Russian. ${new Date().toJSON()}`, 'file')
+      logger.error(`Can\`t start server. IP-address is Russian. ${new Date().toISOString()}`, 'file')
     } else {
       await startApp();
     }
@@ -44,7 +44,7 @@ const prepareAndStart = async () => {
 prepareAndStart()
   .then(() => {
     logger.success('All Systems OK, App started', 'log');
-    logger.success(`All Systems OK, App started ${new Date().toJSON()}`, 'file');
+    logger.success(`All Systems OK, App started ${new Date().toISOString()}`, 'file');
   })
 
 

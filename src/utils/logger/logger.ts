@@ -8,7 +8,7 @@ import {
 	LOG_TYPE,
 	MESSAGE_BG_COLORS,
 	MESSAGE_COLORS,
-	MESSAGE_STYLE,
+	MESSAGE_STYLE, OTHER_COLORS,
 } from "@/utils/logger/constants";
 import * as path from "path";
 import * as process from "process";
@@ -18,7 +18,7 @@ class Logger {
 	logFilePath: string;
 
 	static createLogText(): string {
-		return `\n\n\n\n\n${'- '.repeat(100)}\n  - Logger started in: ${new Date().toJSON()}\n${'- '.repeat(100)}\n`
+		return `\n\n\n\n\n${'- '.repeat(100)}\n  - Logger started in: ${new Date().toISOString()}\n${'- '.repeat(100)}\n`
 	}
 
 	constructor() {
@@ -64,11 +64,14 @@ class Logger {
 		if (target === 'log' || target === 'full') {
 			const fn = console[type] ? console[type] : console.log;
 
+
 			fn(
 				MESSAGE_COLORS[type],
 				MESSAGE_BG_COLORS[type],
 				MESSAGE_STYLE.bold,
 				`${type.toLocaleUpperCase()}:`,
+				OTHER_COLORS.black,
+				new Date().toLocaleString(),
 				MESSAGE_STYLE.reset,
 				message,
 				MESSAGE_STYLE.reset

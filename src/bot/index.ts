@@ -29,7 +29,6 @@ const initBot = async () => {
 	})
 
 	bot.command('time', ctx => ctx.reply(String(new Date())))
-	bot.command('time', ctx => ctx.reply(String(new Date())))
 
 	bot.on(message('text'), ctx => {
 		ctx.reply('just message text')
