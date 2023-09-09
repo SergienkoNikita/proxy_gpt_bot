@@ -9,7 +9,7 @@ import {
 	MESSAGE_BG_COLORS,
 	MESSAGE_COLORS,
 	MESSAGE_STYLE,
-} from "@/server-services/logger/constants";
+} from "@/utils/logger/constants";
 import * as path from "path";
 import * as process from "process";
 
@@ -18,7 +18,7 @@ class Logger {
 	logFilePath: string;
 
 	static createLogText(): string {
-		return `\n\n\n\n\n${'$'.repeat(100)}\nServer started in: ${new Date().toJSON()}\n${'$'.repeat(100)}\n`
+		return `\n\n\n\n\n${'- '.repeat(100)}\n  - Logger started in: ${new Date().toJSON()}\n${'- '.repeat(100)}\n`
 	}
 
 	constructor() {
@@ -45,17 +45,17 @@ class Logger {
 		if (typeof message === 'string' || typeof message === 'number') {
 			fs.appendFileSync(
 				this.logFilePath,
-				`\n${logType.toLocaleUpperCase()}: ${message} (${typeof message})\n${'-'.repeat(100)}`
+				`\n\n${logType.toLocaleUpperCase()}: ${message} (${typeof message})\n${'_ '.repeat(100)}`
 			)
 		} else if (message instanceof Error) {
 			fs.appendFileSync(
 				this.logFilePath,
-				`\n${logType.toLocaleUpperCase()}: ${message.toString()} (${typeof message})\n${'-'.repeat(100)}`
+				`\n\n${logType.toLocaleUpperCase()}: ${message.toString()} (${typeof message})\n${'_ '.repeat(100)}`
 			)
 		} else {
 			fs.appendFileSync(
 				this.logFilePath,
-				`\n${logType.toLocaleUpperCase()}: ${JSON.stringify(message)} (${typeof message})\n${'-'.repeat(100)}`
+				`\n\n${logType.toLocaleUpperCase()}: ${JSON.stringify(message)} (${typeof message})\n${'_ '.repeat(100)}`
 			)
 		}
 	}
@@ -64,7 +64,6 @@ class Logger {
 		if (target === 'log' || target === 'full') {
 			const fn = console[type] ? console[type] : console.log;
 
-			if (type === 'info') console.log('here')
 			fn(
 				MESSAGE_COLORS[type],
 				MESSAGE_BG_COLORS[type],
@@ -82,23 +81,23 @@ class Logger {
 	}
 
 	public info(message: LoggerMessage, target?: LoggerTarget): void {
-		this.addLogMessage(message, target ?? 'log', LOG_TYPE.info)
+		this.addLogMessage(message, target ?? 'full', LOG_TYPE.info)
 	}
 
 	public warning(message: LoggerMessage, target?: LoggerTarget): void {
-		this.addLogMessage(message, target ?? 'log', LOG_TYPE.warning)
+		this.addLogMessage(message, target ?? 'full', LOG_TYPE.warning)
 	}
 
 	public debug(message: LoggerMessage, target?: LoggerTarget): void {
-		this.addLogMessage(message, target ?? 'log', LOG_TYPE.debug)
+		this.addLogMessage(message, target ?? 'full', LOG_TYPE.debug)
 	}
 
 	public error(message: LoggerMessage, target?: LoggerTarget): void {
-		this.addLogMessage(message, target ?? 'log', LOG_TYPE.error)
+		this.addLogMessage(message, target ?? 'full', LOG_TYPE.error)
 	}
 
 	public success(message: LoggerMessage, target?: LoggerTarget): void {
-		this.addLogMessage(message, target ?? 'log', LOG_TYPE.success)
+		this.addLogMessage(message, target ?? 'full', LOG_TYPE.success)
 	}
 }
 

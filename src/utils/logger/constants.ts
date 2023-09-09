@@ -1,4 +1,4 @@
-import {LoggerLogType} from "@/server-services/logger/types";
+import {LoggerLogType} from "@/utils/logger/types";
 
 export const LOG_TYPE: Readonly<Record<LoggerLogType, LoggerLogType>> = {
 	info: 'info',

@@ -1,6 +1,6 @@
 import {DataTypes, Model} from "sequelize";
-import {User} from "@/db/models/user/types/user";
-import {sequelizeConnection} from "@/db/connection/db-connection";
+import {User} from "@/models/user/types/user";
+import {sequelizeConnection} from "@/db/db-connection";
 
 export class UserSchema extends Model<User> implements User {
   public id: number;

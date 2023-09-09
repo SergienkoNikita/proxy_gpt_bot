@@ -1,5 +1,5 @@
-import {UserSchema} from "@/db/models/user/user.model";
-import {User} from "@/db/models/user/types/user";
+import {UserSchema} from "@/models/user/user.model";
+import {User} from "@/models/user/types/user";
 
 class UserService {
   getUserById (id: number): Promise<User | null> {
