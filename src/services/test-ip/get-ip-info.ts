@@ -1,0 +1,1 @@
+export const getIpInfo = async () => fetch('https://api.myip.com').then(res => res.json());

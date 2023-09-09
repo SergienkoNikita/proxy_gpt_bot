@@ -1,0 +1,1 @@
+export {isRussianIP} from './is-russian-ip'

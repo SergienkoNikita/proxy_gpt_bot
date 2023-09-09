@@ -4,7 +4,7 @@ import express from 'express'
 import {Telegraf} from "telegraf";
 import {message} from "telegraf/filters";
 import {mainMenu} from "@/keyboards/main";
-import {sequelizeConnection} from "@/db/db-connection";
+import {sequelizeConnection} from "@/db/connection/db-connection";
 import {userService} from "@/services/user/user.service";
 
 dotenv.config();
@@ -41,6 +41,7 @@ bot.on(message('text'), ctx => {
 })
 
 const startSever = async () => {
+  console.log(process.env.NODE_ENV)
   try {
     await sequelizeConnection.authenticate();
     await sequelizeConnection.sync();
@@ -51,9 +52,7 @@ const startSever = async () => {
     bot.launch()
     console.log('BOT is Running')
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(error);
-    // eslint-disable-next-line no-console
     console.error('Unable to connect to the database:', error);
   }
 }
