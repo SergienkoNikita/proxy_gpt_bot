@@ -27,17 +27,13 @@ const startApp = async () => {
 }
 
 const prepareAndStart = async () => {
-  try {
-    const isIpRussian = await isRussianIP();
+  const isIpRussian = await isRussianIP();
 
-    if (isIpRussian) {
-      logger.error('Can`t start server. Your`s IP-address is Russian. Please use VPN.', 'log')
-      logger.error(`Can\`t start server. IP-address is Russian. ${new Date().toISOString()}`, 'file')
-    } else {
-      await startApp();
-    }
-  } catch (error) {
-    logger.error(error)
+  if (isIpRussian) {
+    logger.error(`Can\`t start server. IP-address is Russian. ${new Date().toISOString()}`, 'file')
+    throw new Error('Can`t start server. Your`s IP-address is Russian. Please use VPN.');
+  } else {
+    return startApp();
   }
 }
 
@@ -45,6 +41,9 @@ prepareAndStart()
   .then(() => {
     logger.success('All Systems OK, App started', 'log');
     logger.success(`All Systems OK, App started ${new Date().toISOString()}`, 'file');
+  })
+  .catch((error) => {
+    logger.error(error)
   })
 
 
