@@ -9,6 +9,8 @@ declare global {
       DB_PORT: string
       DB_USER: string
       DB_PASSWORD: string
+
+      GPT_API_KEY: string
     }
   }
 }

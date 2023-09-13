@@ -3,21 +3,21 @@ import {User} from "@/models/user/types/user";
 import {sequelizeConnection} from "@/db/db-connection";
 
 export class UserSchema extends Model<User> implements User {
-  public id: number;
+  declare id: number;
 
-  public is_bot: boolean;
+  declare is_bot: boolean;
 
-  public first_name: string;
+  declare first_name: string;
 
-  public last_name?: string;
+  declare last_name?: string;
 
-  public username?: string;
+  declare username?: string;
 
-  public language_code?: string;
+  declare language_code?: string;
 
-  public is_premium?: true;
+  declare is_premium?: true;
 
-  public added_to_attachment_menu?: true;
+  declare added_to_attachment_menu?: true;
 }
 
 UserSchema.init({

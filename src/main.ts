@@ -5,6 +5,7 @@ import {connectDb} from "@/db";
 import {logger} from "@/utils/logger";
 import {isRussianIP} from "@/utils/test-ip";
 import {startBot} from "@/bot";
+import {connectGpt} from "@/bot/gpt";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ const startApp = async () => {
     await connectDb();
     await startBot();
     startServer();
+    await connectGpt();
   } catch (error) {
     logger.error(error);
   }
